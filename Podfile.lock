@@ -1,0 +1,20 @@
+PODS:
+  - lottie-ios (3.1.9)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - lottie-ios
+  - SwiftyJSON
+
+SPEC REPOS:
+  trunk:
+    - lottie-ios
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: 9241ee8590a5a7e34d3fc4c290082ae9437e0910
+
+COCOAPODS: 1.9.3
