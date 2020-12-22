@@ -22,7 +22,7 @@ class SearchRecipeInteractor: SearchRecipeInteractorLogic {
                 if let dataFromNetworking = data {
                     if let json = try? JSON(data: dataFromNetworking){
                         for item in json["meals"].arrayValue {
-                            let newRecipe = Recipe(title: item["strMeal"].stringValue, detail: item["strCategory"].stringValue, urlImage: item["strMealThumb"].stringValue)
+                            let newRecipe = Recipe(id: item["idMeal"].intValue, title: item["strMeal"].stringValue, detail: item["strCategory"].stringValue, urlImage: item["strMealThumb"].stringValue)
                             searchResults.append(newRecipe)
                         }
                     }

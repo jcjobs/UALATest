@@ -8,11 +8,15 @@
 import Foundation
 
 struct Recipe {
+    let id: Int
     let title: String
     let detail: String
     let urlImage: String
     
-    init(title: String, detail: String, urlImage: String) {
+    var ingredients:[String] = [String]()
+    
+    init(id:Int, title: String, detail: String, urlImage: String) {
+        self.id = id
         self.title = title
         self.detail = detail
         self.urlImage = urlImage

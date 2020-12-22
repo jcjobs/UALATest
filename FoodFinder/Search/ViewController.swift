@@ -39,6 +39,7 @@ class ViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         searchResultsFor()
     }
 
@@ -56,8 +57,9 @@ private extension ViewController {
         tblRecipeResult.dataSource = self
     }
     
-    func searchResultsFor(){
-        presenter?.searchResultsFor(searchString: "salmon")
+    func searchResultsFor() {
+        guard let searchString = srcMealSearchBar.text else { return }
+        presenter?.searchResultsFor(searchString: searchString)
     }
 }
 
@@ -86,19 +88,18 @@ extension ViewController: UISearchBarDelegate {
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-           
+       
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
        searchBar.text = nil
        searchBar.resignFirstResponder()
        tblRecipeResult.resignFirstResponder()
-       //self.srcProductSearch.showsCancelButton = false
         tblRecipeResult.reloadData()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //view.endEditing(true)
+        searchResultsFor()
         searchBar.resignFirstResponder()
     }
 
@@ -107,7 +108,10 @@ extension ViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        tblRecipeResult.reloadData()
+        if searchBar.text == "" {
+            searchResultsFor()
+            searchBar.resignFirstResponder()
+        }
     }
     
 }
@@ -130,7 +134,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //presenter?.showReviewDetail(itemId: reviews[indexPath.row].id)
+        let selectedItem = arrayRecipe[indexPath.row]
+        presenter?.showRecipeDetail(with: selectedItem.id)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -6,19 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SearchRecipePresenterLogic {
     func searchResultsFor(searchString: String)
+    func showRecipeDetail(with recipeId: Int)
 }
 
 class SearchRecipePresenter: SearchRecipePresenterLogic {
     
     private var viewModel: SearchFoodDisplayLogic
     private var interactor: SearchRecipeInteractorLogic
+    private var wireframe: SearchRecipeWireframe
     
     init(with viewModel: SearchFoodDisplayLogic) {
         self.viewModel = viewModel
         interactor = SearchRecipeInteractor()
+        let navigation = (self.viewModel as? UIViewController)?.navigationController
+        wireframe = SearchRecipeWireframe(with: navigation)
     }
     
     func searchResultsFor(searchString: String) {
@@ -35,6 +40,10 @@ class SearchRecipePresenter: SearchRecipePresenterLogic {
                 self?.viewModel.hideLoader()
             }
         }
+    }
+    
+    func showRecipeDetail(with recipeId: Int) {
+        wireframe.showRecipeDetail(recipeId: recipeId)
     }
     
 }
